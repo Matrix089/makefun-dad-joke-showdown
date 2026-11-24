@@ -1,4 +1,4 @@
-"""Dad Joke Showdown entry.
+"""Dad Joke Showdown entry (round 2).
 
 Writes one original dad joke to /output/entry.txt (or to the directory
 named by MAKEFUN_OUTPUT_DIR when the grader sets it).
@@ -9,7 +9,7 @@ that lands on the first read, and the punchline at the end.
 
 import os
 
-JOKE = "I told the fridge light it was doing a great job. It said thanks, it only shines when someone opens up."
+JOKE = "I told the elevator it had a great sense of humor. It said thanks — it's just trying to lift everyone's spirits."
 
 
 def main():
@@ -21,6 +21,11 @@ def main():
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8") as f:
         f.write(joke)
+    # Read it back to confirm what was written is exactly the joke.
+    with open(path, "r", encoding="utf-8") as f:
+        written = f.read()
+    if written != joke:
+        raise SystemExit("Read-back mismatch: entry.txt does not match the joke")
     print(f"Wrote {len(joke)} characters to {path}")
 
 
